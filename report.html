@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- This script loads the Appian Web components; change it to your Appian server's domain -->
+    <script src="https://genesys-191.appianci.net/suite/tempo/ui/sail-client/embeddedBootstrap.nocache.js" id="appianEmbedded" data-themeidentifier="" data-startzindex="" data-signin=""></script>
+    <script>
+      /* This function dynamically inserts an <appian-task> element into the page with the user-specified taskId */
+      function addReport() {
+        var reportId = document.getElementById('new-record').value;
+        if (reportId) {
+          var newReport = document.createElement('appian-record-view');
+          newReport.setAttribute("recordTypeUrlStub", "oyUf2g");
+          // need validation of id, how?
+          newReport.setAttribute("id", reportId);
+          newReport.setAttribute("recordIdentifier", reportId);
+          newReport.setAttribute("recordViewUrlStub", "summary");
+          document.body.insertBefore(newReport, document.getElementById('insertPoint'));
+        }
+      }
+
+      function showReport() {
+        var reportId = document.getElementById('new-record').value;
+        if (reportId && document.getElementById(reportId)) {
+          document.getElementById(reportId).style.visibility = 'visible';
+        }
+      }
+
+      function hideReport() {
+        var reportId = document.getElementById('new-record').value;
+        if (reportId && document.getElementById(reportId)) {
+          document.getElementById(reportId).style.visibility = 'hidden';
+        }
+      }
+
+    </script>
+  </head>
+  <body>
+    <input id="new-record" />
+    <button onclick="return addReport();">Embed This Report</button>
+    <button onclick="return hideReport();">Hide a report</button>
+    <button onclick="return showReport();">Show a report</button>
+    <div id="insertPoint"></div>
+  </body>
+</html>
